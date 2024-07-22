@@ -1,0 +1,164 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #6666ff;
+}
+
+.form__login {
+    display: flex;
+    max-width: 800px;
+    min-height: 360px;
+    margin: 15px;
+    border: 5px solid #cc66ff;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.form__login h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.content__first {
+    margin-right: 50px;   
+    width: 50%;
+    padding: 15px;
+}
+
+.content__second {
+    width: 50%;
+    text-align: left;
+    font-size: 22px;
+    padding: 15px;
+    border-left: 1px solid #ccc;
+    padding-left: 5px;
+    background-color: #6666ff;
+}
+
+.content__second .content {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    color: #fff;
+}
+
+.content .btn {
+    border-radius: 22px;
+    border: none;
+    background-color: #9900ff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.content .btn:hover {
+    background-color: #6600cc;
+}
+
+.input__login {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.input__login label {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    transform: translateY(9px);
+    left: 15px;
+    color: #999;
+    pointer-events: none;
+    background-color: #fff;
+    animation: input__login 0.3s;
+}
+
+@keyframes input__login {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-13px);
+    }
+}
+
+.input__login input {
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.input__login input:focus ~ label,
+.input__login input:valid ~ label {
+    display: block;
+    transform: translateY(-13px);
+    color: #007bff;
+}
+
+.input__login input:focus,
+.input__login input:valid {
+    border-color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 30px;
+    transition:  all 0.3s;
+}
+
+.input__login input:focus::placeholder,
+.input__login input:valid::placeholder {
+    color: transparent;
+}
+
+.btn__submit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #ccc;
+    padding-top: 16px;
+    margin-top: 30px;
+}
+    
+.btn__submit .btn {
+    border-radius: 22px;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn__submit .btn:hover {
+    background-color: #0056b3;
+}
+
+.btn__submit .btn:active {
+    background-color: #004286;
+}
+
+.btn__submit .btn:focus {
+    outline: none;
+}
+
+.btn__submit .btn.btn--disabled {
+    background-color: gray !important;
+    cursor: not-allowed;
+}
+
+.link__register {
+    text-align: center;
+}
+
+.link__forgot {
+    text-align: right;
+}
+
+/* disabled */
+.disabled {
+    pointer-events: none; /* Ngăn chặn sự kiện chuột */
+    color: gray !important; /* Thay đổi màu chữ */
+    text-decoration: none; /* Loại bỏ gạch chân */
+    background-color: #f1f1f1 !important; /* Thay đổi màu nền */
+}
