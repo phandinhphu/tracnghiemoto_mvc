@@ -10,15 +10,13 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="get">
-                            <input type="hidden" name="module" value="pages">
-                            <input type="hidden" name="action" value="ontap">
+                        <form action="http://localhost/tracnghiemoto_mvc/on-tap/tim-kiem/trang-1.html" method="get">
                             <div class="form-group">
                                 <label for="examName">Chọn bài thi</label>
                                 <?php
                                 foreach ($examName as $exam) : ?>
                                     <div class="form-check ml-5">
-                                        <input class="form-check-input" type="radio" name="examName" id="<?php echo $exam['examName']; ?>" value="<?php echo $exam['examName']; ?>" <?php echo isset($_GET['examName']) && $_GET['examName'] == $exam['examName'] ? 'checked' : ''; ?>>
+                                        <input class="form-check-input" type="radio" name="searchTerm" id="<?php echo $exam['examName']; ?>" value="<?php echo $exam['examName']; ?>" <?php echo isset($_GET['searchTerm']) && $_GET['searchTerm'] == $exam['examName'] ? 'checked' : ''; ?>>
                                         <label class="form-check-label ml-2" for="<?php echo $exam['examName']; ?>">
                                             <?php echo $exam['examName']; ?>
                                         </label>
@@ -28,13 +26,13 @@
                             <div class="form-group">
                                 <label for="_sort">Sắp xếp theo độ khó</label>
                                 <div class="form-check ml-5">
-                                    <input class="form-check-input" type="radio" name="_sort" id="easy" value="easy" <?php echo isset($_GET['_sort']) && $_GET['_sort'] == 'easy' ? 'checked' : ''; ?>>
+                                    <input class="form-check-input" type="radio" name="filter" id="easy" value="easy" <?php echo isset($_GET['filter']) && $_GET['filter'] == 'easy' ? 'checked' : ''; ?>>
                                     <label class="form-check-label ml-2" for="easy">
                                         Easy
                                     </label>
                                 </div>
                                 <div class="form-check ml-5">
-                                    <input class="form-check-input" type="radio" name="_sort" id="hard" value="hard" <?php echo isset($_GET['_sort']) && $_GET['_sort'] == 'hard' ? 'checked' : ''; ?>>
+                                    <input class="form-check-input" type="radio" name="filter" id="hard" value="hard" <?php echo isset($_GET['filter']) && $_GET['filter'] == 'hard' ? 'checked' : ''; ?>>
                                     <label class="form-check-label ml-2" for="hard">
                                         Hard
                                     </label>
@@ -42,7 +40,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary mt-3">Lọc</button>
-                            <a class="btn btn-primary mt-3 ml-4" href="?module=pages&action=ontap">Hủy lọc</a>
+                            <a class="btn btn-primary mt-3 ml-4" href="http://localhost/tracnghiemoto_mvc/on-tap">Hủy lọc</a>
                         </form>
                     </div>
                 </div>
@@ -102,7 +100,7 @@
                             <ul class="pagination" style="flex-wrap: wrap;">
                                 <?php if ($page > 1) : ?>
                                     <li class="page-item">
-                                        <a class="page-link" href="<?= WEB_ROOT . '/client/ontap/index/' . ($page - 1) ?>" aria-label="Previous">
+                                        <a class="page-link" href="<?= WEB_ROOT . $newUrl . ($page - 1) . '.html' ?> <?= $paramString ?? ' ' ?>" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                             <span class="sr-only">Previous</span>
                                         </a>
@@ -111,13 +109,13 @@
 
                                 <?php for ($i = 1; $i <= $totalPage; $i++) : ?>
                                     <li class="page-item <?= $page == $i ? 'active' : ''; ?>">
-                                        <a class="page-link" href="<?= WEB_ROOT . '/client/ontap/index/' . ($i) ?>"><?= $i ?></a>
+                                        <a class="page-link" href="<?= WEB_ROOT . $newUrl . ($i) . '.html' ?> <?= $paramString ?? ' ' ?>"><?= $i ?></a>
                                     </li>
                                 <?php endfor; ?>
 
                                 <?php if ($page < $totalPage) : ?>
                                     <li class="page-item">
-                                        <a class="page-link" href="<?= WEB_ROOT . '/client/ontap/index/' . ($page + 1) ?>" aria-label="Next">
+                                        <a class="page-link" href="<?= WEB_ROOT . $newUrl . ($page + 1) . '.html' ?> <?= $paramString ?? ' ' ?>" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                             <span class="sr-only">Next</span>
                                         </a>

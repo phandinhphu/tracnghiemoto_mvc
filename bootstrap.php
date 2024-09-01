@@ -25,6 +25,7 @@ foreach ($configs as $config) {
 
 require_once 'core/Connection.php';
 require_once 'core/Database.php';
+require_once 'core/Route.php';
 require_once 'core/Model.php';
 require_once 'core/Controller.php';
 require_once 'app/App.php';

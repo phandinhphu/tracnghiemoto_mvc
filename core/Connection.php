@@ -1,6 +1,7 @@
 <?php
 class Connection {
-    private static $instance = null, $conn = null;
+    private static $conn = null;
+    private static ?Connection $instance = null;
 
     private function __construct() {  }
 
@@ -23,6 +24,7 @@ class Connection {
                 PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             ];
+
             self::$conn = new PDO($dsn, $configs['database']['username'], $configs['database']['password'], $options);
         } catch (PDOException $e) {
             die($e->getMessage());

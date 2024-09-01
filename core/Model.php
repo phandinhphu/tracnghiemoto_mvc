@@ -1,7 +1,7 @@
 <?php
 class Model {
-    protected $db;
-    protected $limit = 15;
+    protected Database $db;
+    protected int $limit = 15;
 
     public function __construct() {
         $this->db = Database::GetInstance();

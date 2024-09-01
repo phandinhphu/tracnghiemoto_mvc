@@ -1,7 +1,7 @@
 <?php
 class Database {
-    private static $instance = null;
-    private $__conn = null;
+    private static ?Database $instance = null;
+    private ?PDO $__conn = null;
 
     private function __construct() {
         $this->__conn = Connection::GetInstance()->GetConnection();

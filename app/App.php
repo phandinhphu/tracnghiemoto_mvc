@@ -1,10 +1,13 @@
 <?php
 class App {
-    private $__namespace, $__controller, $__method, $__params;
+    private $__namespace, $__controller, $__method, $__params, $__route;
 
     public function __construct() {
-        $this->__namespace = 'client';
-        $this->__controller = 'Home';
+        global $routes;
+
+        $this->__route = new Route;
+        $this->__namespace = $routes['default_namespace'] ?? 'Client';
+        $this->__controller = $routes['default_controller'] ?? 'Home';
         $this->__method = 'index';
         $this->__params = [];
 
@@ -18,6 +21,8 @@ class App {
     public function handleUrl(): void
     {
         $url = $this->getUrl();
+
+        $url = $this->__route->handleRoute($url);
 
         $urlArr = array_values(array_filter(explode('/', $url)));
 
@@ -65,6 +70,15 @@ class App {
                 if (method_exists($this->__controller, $this->__method)) {
                     $this->__params = $urlArr ? array_values($urlArr) : [];
 
+                    if (!empty($this->__params)) {
+                        foreach ($this->__params as $key => $value) {
+                            $parts = explode('&', $value);
+                            if (count($parts) > 1) {
+                                $this->__params[$key] = $parts[0];
+                            }
+                        }
+                    }
+
                     call_user_func_array([$this->__controller, $this->__method], $this->__params);
                 } else {
                     $this->error();
@@ -77,7 +91,8 @@ class App {
         }
     }
 
-    public function error($error = '404') {
+    public function error($error = '404'): void
+    {
         require_once 'app/errors/' . $error . '.php';
     }
 }
