@@ -2,27 +2,28 @@
 
 class QuestionModel extends Model {
     public $table = 'questions';
-    protected Database $db;
 
     public function __construct() {
         parent::__construct();
-        $this->db = Database::GetInstance();
     }
 
     public function search($searchTerm, $filter, $page) {
         $limit = $this->limit;
         $offset = ($page - 1) * $limit;
+        $condition = [];
         $sql = 'SELECT * FROM questions';
 
         if (!empty($searchTerm)) {
             $sql .= " WHERE chuDe = '$searchTerm'";
+            $condition['chuDe'] = $searchTerm;
         }
 
         if (!empty($filter)) {
             $sql .= " AND difficulty = '$filter'";
+            $condition['difficulty'] = $filter;
         }
 
-        $total = count($this->db->get($this->table, ['chuDe' => $searchTerm, 'difficulty' => $filter]));
+        $total = count($this->db->get($this->table, $condition));
 
         $sql .= " LIMIT $offset, $limit";
 

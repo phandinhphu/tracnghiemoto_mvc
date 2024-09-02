@@ -57,7 +57,7 @@ class Database {
         return $this->query($sql, $where)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getOne($sql, $data = []): array
+    public function getOne($sql, $data = []): array|false
     {
         return $this->query($sql, $data)->fetch(PDO::FETCH_ASSOC);
     }

@@ -7,13 +7,13 @@
             <div class="header__menu">
                 <ul class="first__list">
                     <li class="first__items">
-                        <a class="first__items-link" href="<?= WEB_ROOT . '/client/home' ?>">Trang chủ</a>
+                        <a class="first__items-link" href="<?= WEB_ROOT . '/trang-chu' ?>">Trang chủ</a>
                     </li>
                     <li class="first__items">
-                        <a class="first__items-link" href="<?= WEB_ROOT . '/client/ontap' ?>">Ôn tập</a>
+                        <a class="first__items-link" href="<?= WEB_ROOT . '/on-tap' ?>">Ôn tập</a>
                     </li>
                     <li class="first__items">
-                        <a class="first__items-link" href="?module=pages&action=thithu">Thi thử</a>
+                        <a class="first__items-link" href="<?= WEB_ROOT . '/thi-thu' ?>">Thi thử</a>
                         <ul class="context__list">
                             <?php foreach ($examName as $exam) : ?>
                                 <li class="context__items">
@@ -31,8 +31,8 @@
 
         <div class="header__second">
             <div class="header__second-user">
-                <?php if (isset($_SESSION['user'])) : ?>
-                    <span class="header__second-user-name"><?= isset($_SESSION['user']['userName']) ?></span>
+                <?php if (isset($_SESSION['user_id'])) : ?>
+                    <span class="header__second-user-name"><?= $_SESSION['name'] ?></span>
                     <div class="header__second-user-menu">
                         <ul class="second__list">
                             <li class="second__items">
@@ -47,10 +47,10 @@
                     <div class="header__menu">
                         <ul class="first__list">
                             <li class="first__items">
-                                <a class="first__items-link" href="?module=pages&action=trangchu">Đăng nhập</a>
+                                <a class="first__items-link" href="<?= WEB_ROOT . '/dang-nhap' ?>">Đăng nhập</a>
                             </li>
                             <li class="first__items">
-                                <a class="first__items-link" href="?module=pages&action=ontap">Đăng ký</a>
+                                <a class="first__items-link" href="<?= WEB_ROOT . '/dang-ky' ?>">Đăng ký</a>
                             </li>
                         </ul>
                     </div>

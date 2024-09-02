@@ -15,7 +15,12 @@ class Model {
         }
         $offset = ($page - 1) * $this->limit;
         $sql = "SELECT $selected FROM $this->table LIMIT $offset, $this->limit";
-        return $this->db->getAll($sql);
+
+        $total = count($this->db->get($this->table));
+        return [
+            'data' => $this->db->getAll($sql),
+            'total' => $total
+        ];
     }
 
     public function getByCondition($where = [], $selected = '*', $page = 1): array
@@ -36,11 +41,9 @@ class Model {
         return $this->db->get($this->table, ['id' => $id], '*');
     }
 
-    public function getTotalPage(): int
+    public function getTotalPage($total): int
     {
-        $sql = "SELECT COUNT(*) as 'Total' FROM $this->table";
-        $total = $this->db->getOne($sql);
-        return ceil($total['Total']/$this->limit);
+        return ceil($total/$this->limit);
     }
 
     public function Add($data = []): false|PDOStatement

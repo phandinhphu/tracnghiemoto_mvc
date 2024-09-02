@@ -11,10 +11,12 @@ class Ontap extends Controller {
 
     public function index($page = 1): void
     {
-        $this->data['subcontent']['questions'] = $this->questionModel->getAll('*', $page);
+        $res = $this->questionModel->getAll('*', $page);
+
+        $this->data['subcontent']['questions'] = $res['data'];
         $this->data['subcontent']['examName'] = $this->examModel->getByCondition(['status' => 1], 'examName', 'all');
         $this->data['subcontent']['page'] = $page;
-        $this->data['subcontent']['totalPage'] = $this->questionModel->getTotalPage();
+        $this->data['subcontent']['totalPage'] = $this->questionModel->getTotalPage($res['total']);
         $this->data['subcontent']['newUrl'] = '/on-tap/trang-';
 
         $this->data['content'] = 'client/ontap';
