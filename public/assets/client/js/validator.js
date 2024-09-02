@@ -13,6 +13,10 @@ function Validator(formSelector) {
             var regex = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm;
             return regex.test(value) ? undefined : 'Trường này phải là email';
         },
+        phone: function(value) {
+            var regex = /^(0)[0-9]{9}$/;
+            return regex.test(value) ? undefined : 'Trường này phải là số điện thoại';
+        },
         confirmation: function(value) {
             return value === $(formSelector).querySelector('#password').value ? undefined : 'Mật khẩu không khớp';
         },

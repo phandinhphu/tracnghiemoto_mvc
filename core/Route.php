@@ -16,6 +16,8 @@ class Route
                 }
             }
         }
-        return $url;
+
+        $url = explode('&', $url);
+        return $url[0];
     }
 }

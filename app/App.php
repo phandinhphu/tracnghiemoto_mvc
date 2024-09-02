@@ -70,15 +70,6 @@ class App {
                 if (method_exists($this->__controller, $this->__method)) {
                     $this->__params = $urlArr ? array_values($urlArr) : [];
 
-                    if (!empty($this->__params)) {
-                        foreach ($this->__params as $key => $value) {
-                            $parts = explode('&', $value);
-                            if (count($parts) > 1) {
-                                $this->__params[$key] = $parts[0];
-                            }
-                        }
-                    }
-
                     call_user_func_array([$this->__controller, $this->__method], $this->__params);
                 } else {
                     $this->error();

@@ -17,13 +17,13 @@
                         <ul class="context__list">
                             <?php foreach ($examName as $exam) : ?>
                                 <li class="context__items">
-                                    <a class="context__items-link" href="?module=pages&action=thithu&exam_name=<?php echo $exam['examName']; ?>"><?php echo $exam['examName']; ?></a>
+                                    <a class="context__items-link" href="http://localhost/tracnghiemoto_mvc/thi-thu?exam_name=<?php echo $exam['examName']; ?>"><?php echo $exam['examName']; ?></a>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
                     </li>
                     <li class="first__items">
-                        <a class="first__items-link" href="?module=pages&action=historyQuestion">Lịch sử</a>
+                        <a class="first__items-link" href="http://localhost//tracnghiemoto_mvc/lich-su">Lịch sử</a>
                     </li>
                 </ul>
             </div>

@@ -51,7 +51,11 @@ class Auth extends Controller
 
     public function register(): void
     {
-        $this->view('client/auth/register');
+        $this->data['subcontent']['examName'] = $this->examModel->getByCondition(['status' => 1], 'examName', 'all');
+        $this->data['title'] = 'Login';
+        $this->data['content'] = 'client/auth/register';
+
+        $this->view('layouts/client_layout', $this->data);
     }
 
     public function forgotPassword(): void

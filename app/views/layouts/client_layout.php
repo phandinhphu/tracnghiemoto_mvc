@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= WEB_ROOT . '/public/assets/client/css/grid.css' ?>">
-    <link rel="stylesheet" href="<?= WEB_ROOT . '/public/assets/client/css/login.css' ?>">
+    <?php if (isset($title) && ($title == 'Login' || $title == 'Register')) : ?>
+        <link rel="stylesheet" href="<?= WEB_ROOT . '/public/assets/client/css/login.css' ?>">
+    <?php endif; ?>
     <link rel="stylesheet" href="<?= WEB_ROOT . '/public/assets/client/css/main.css' ?>">
 </head>
 <body>

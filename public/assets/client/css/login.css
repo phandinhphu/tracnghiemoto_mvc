@@ -1,4 +1,10 @@
-.app > form {
+.app__container {
+    display: flex;
+    min-height: 100vh;
+    margin: auto;
+}
+
+.app__container > form {
     display: flex;
     flex-direction: column;
     margin: auto;
