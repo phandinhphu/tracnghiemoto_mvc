@@ -11,8 +11,8 @@ html {
 }
 
 #fixed-info {
+	display: block;
 	max-width: 625px;
-	display: none;
 	position: fixed;
 	top: 100px;
 	left: 19px;
@@ -68,6 +68,7 @@ header {
 }
 
 .first__list {
+	position: relative;
 	list-style: none;
 	display: flex;
 	flex-direction: row;
@@ -76,26 +77,37 @@ header {
 
 .first__items {
 	position: relative;
-	margin-right: 1rem;
 }
 
 .first__items-link {
+	display: block;
 	text-decoration: none;
 	color: #fff;
-	padding: 1rem;
+	padding: 8px 14px;
+}
+
+.line {
+	position: absolute;
+	height: 2px;
+	background: #fff;
+	bottom: 0;
+	transition: transform 0.3s;
 }
 
 .first__items-link:hover {
 	text-decoration: none;
-	background-color: #fff;
-	color: #06e286;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.first__items.active .first__items-link {
+	color: rgba(255, 255, 255, 0.8);
 }
 
 /* List Context */
 .context__list {
 	position: absolute;
 	z-index: 1;
-	top: 34px;
+	top: 50px;
 	left: 0;
 	width: calc(100% + 18rem);
 	list-style: none;
@@ -153,6 +165,19 @@ header {
 	display: flex;
 }
 
+.header__second-user-info {
+	display: flex;
+	align-items: center;
+}
+
+.header__second-user-avatar {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-right: 1.2rem;
+}
+
 .header__second-user-name {
 	font-size: 1.6rem;
 	margin-right: 5rem;
@@ -161,7 +186,7 @@ header {
 .header__second-user-menu {
 	position: absolute;
 	z-index: 1;
-	top: 30px;
+	top: 45px;
 	right: -12px;
 	width: 18rem;
 	display: none;
@@ -471,10 +496,15 @@ header {
 	padding: 0.6rem;
 }
 
+.list-group-link.selected,
 .list-group-link:hover {
 	text-decoration: none;
 	background-color: #06e286;
 	color: #fff;
+}
+
+.list-group-link.selected {
+	pointer-events: none;
 }
 
 .btn {
@@ -608,4 +638,104 @@ header {
     border-top: 1px solid #ddd;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
+}
+
+/* Form */
+.card-body > form {
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+#form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 20px;
+	background-color: #fff;
+}
+
+#form .heading {
+	font-size: 1.5rem;
+	text-align: center;
+}
+
+.spacer {
+	margin-bottom: 20px;
+}
+
+.form__group{
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+}
+
+.avatar__label {
+	display: flex;
+	align-items: center;
+}
+
+.avatar {
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-right: 1.2rem;
+}
+
+.form__label {
+	margin-bottom: 5px;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.form__input {
+	font-size: 16px;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.form__input:focus {
+	outline: none;
+	border-color: #09db36;
+}
+
+.form__input:hover {
+	border-color: #09db36;
+}
+
+.form__message {
+	font-size: 16px;
+	margin-bottom: 8px;
+}
+
+.form__submit {
+	font-size: 18px;
+	padding: 5px;
+	border: none;
+	border-radius: 5px;
+	background-color: #09db36;
+	color: white;
+	cursor: pointer;
+	margin-top: 8px;
+}
+
+.form__submit:hover {
+	background-color: #0a9b27;
+}
+
+.form__group.invalid .form__input {
+	border-color: #ff0000;
+}
+
+.form__group.invalid .form__message {
+	color: #ff0000;
+}
+
+.form__group.invalid .form__label {
+	color: #ff0000;
 }

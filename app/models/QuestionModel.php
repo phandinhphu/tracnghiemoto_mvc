@@ -1,13 +1,14 @@
 <?php
 
 class QuestionModel extends Model {
-    public $table = 'questions';
+    public string $table = 'questions';
 
     public function __construct() {
         parent::__construct();
     }
 
-    public function search($searchTerm, $filter, $page) {
+    public function search($searchTerm, $filter, $page): array
+    {
         $limit = $this->limit;
         $offset = ($page - 1) * $limit;
         $condition = [];
@@ -36,5 +37,21 @@ class QuestionModel extends Model {
     public function getTotalPageQuestion($total): int
     {
         return ceil($total/$this->limit);
+    }
+
+    public function getRandomQuestion($examName, $totalQuestion): array
+    {
+        $sql = "SELECT * FROM questions WHERE chuDe = :chuDe ORDER BY RAND() LIMIT $totalQuestion";
+        return $this->db->getAll($sql, ['chuDe' => $examName]);
+    }
+
+    public function getQuestionByIdAndTestDate($testDate, $userId): array
+    {
+        $sql = "SELECT history.id AS historyId, history.answerUser, history.result, questions.* 
+                FROM history, questions
+                WHERE history.questionId = questions.id
+                AND history.dateAnswer = :testDate AND history.userId = :userId";
+
+        return $this->db->getAll($sql, ['testDate' => $testDate, 'userId' => $userId]);
     }
 }

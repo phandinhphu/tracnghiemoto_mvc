@@ -2,7 +2,7 @@
     <div class="grid wide">
         <div class="row">
             <div class="col l-3 c-3">
-                <div class="card mt-3">
+                <div class="card">
                     <div class="card-header">
                         <h3>
                             Filter
@@ -11,19 +11,19 @@
                     </div>
                     <div class="card-body">
                         <form action="http://localhost/tracnghiemoto_mvc/on-tap/tim-kiem/trang-1.html" method="get">
-                            <div class="form-group">
+                            <div class="form__group">
                                 <label for="examName">Chọn bài thi</label>
                                 <?php
-                                foreach ($examName as $exam) : ?>
+                                foreach ($examNames as $exam) : ?>
                                     <div class="form-check ml-5">
-                                        <input class="form-check-input" type="radio" name="searchTerm" id="<?php echo $exam['examName']; ?>" value="<?php echo $exam['examName']; ?>" <?php echo isset($_GET['searchTerm']) && $_GET['searchTerm'] == $exam['examName'] ? 'checked' : ''; ?>>
-                                        <label class="form-check-label ml-2" for="<?php echo $exam['examName']; ?>">
-                                            <?php echo $exam['examName']; ?>
+                                        <input class="form-check-input" type="radio" name="searchTerm" id="<?= $exam['examName']; ?>" value="<?= $exam['examName']; ?>" <?= isset($_GET['searchTerm']) && $_GET['searchTerm'] == $exam['examName'] ? 'checked' : ''; ?>>
+                                        <label class="form-check-label ml-2" for="<?= $exam['examName']; ?>">
+                                            <?= $exam['examName']; ?>
                                         </label>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
-                            <div class="form-group">
+                            <div class="form__group">
                                 <label for="_sort">Sắp xếp theo độ khó</label>
                                 <div class="form-check ml-5">
                                     <input class="form-check-input" type="radio" name="filter" id="easy" value="easy" <?php echo isset($_GET['filter']) && $_GET['filter'] == 'easy' ? 'checked' : ''; ?>>
@@ -39,8 +39,12 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary mt-3">Lọc</button>
-                            <a class="btn btn-primary mt-3 ml-4" href="http://localhost/tracnghiemoto_mvc/on-tap">Hủy lọc</a>
+                            <div class="form__group">
+                                <button type="submit" class="btn btn-primary mt-3">Lọc</button>
+                            </div>
+                            <div class="form__group">
+                                <a class="btn btn-primary mt-3" href="http://localhost/tracnghiemoto_mvc/on-tap">Hủy lọc</a>
+                            </div>
                         </form>
                     </div>
                 </div>

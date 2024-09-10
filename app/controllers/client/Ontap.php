@@ -13,8 +13,9 @@ class Ontap extends Controller {
     {
         $res = $this->questionModel->getAll('*', $page);
 
+        $this->data['subcontent']['tab'] = 'ontap';
         $this->data['subcontent']['questions'] = $res['data'];
-        $this->data['subcontent']['examName'] = $this->examModel->getByCondition(['status' => 1], 'examName', 'all');
+        $this->data['subcontent']['examNames'] = $this->examModel->getByCondition(['status' => 1], 'examName', 'all');
         $this->data['subcontent']['page'] = $page;
         $this->data['subcontent']['totalPage'] = $this->questionModel->getTotalPage($res['total']);
         $this->data['subcontent']['newUrl'] = '/on-tap/trang-';
@@ -32,8 +33,9 @@ class Ontap extends Controller {
 
         $res = $this->questionModel->search($searchTerm, $filter, $page);
 
+        $this->data['subcontent']['tab'] = 'ontap';
         $this->data['subcontent']['questions'] = $res['questions'];
-        $this->data['subcontent']['examName'] = $this->examModel->getByCondition(['status' => 1], 'examName', 'all');
+        $this->data['subcontent']['examNames'] = $this->examModel->getByCondition(['status' => 1], 'examName', 'all');
         $this->data['subcontent']['page'] = $page;
         $this->data['subcontent']['totalPage'] = $this->questionModel->getTotalPageQuestion($res['total']);
         $this->data['subcontent']['newUrl'] = '/on-tap/tim-kiem/trang-';

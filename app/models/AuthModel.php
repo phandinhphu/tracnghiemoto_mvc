@@ -1,7 +1,7 @@
 <?php
 class AuthModel extends Model
 {
-    public $table = 'users';
+    public string $table = 'users';
 
     public function __construct()
     {

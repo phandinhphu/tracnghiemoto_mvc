@@ -1,6 +1,3 @@
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
-
 function Validator(formSelector) {
     var _this = this;
     var formRules = {};
