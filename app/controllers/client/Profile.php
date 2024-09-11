@@ -39,6 +39,7 @@ class Profile extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = $_POST;
 
+            $oldAvatar = $this->userModel->getUser($_SESSION['user_id'])[0]['avatar'];
             $checkAvatar = $this->processAvatar();
 
             if ($checkAvatar['status'] === 'error') {
@@ -49,6 +50,12 @@ class Profile extends Controller
                 return;
             }
 
+            // Xóa avatar cũ
+            if ($oldAvatar != '' && $checkAvatar['status'] === 'success') {
+                unlink($oldAvatar);
+            }
+
+            // Kiểm tra email có tồn tại không
             $emailExit = $this->userModel->checkEmail($data['email'])[0];
             if ($emailExit && $emailExit['email'] !== $_SESSION['email']) {
                 echo json_encode([
@@ -61,12 +68,14 @@ class Profile extends Controller
             $dataUpdate = [
                 'email' => $data['email'],
                 'phone' => $data['phone'],
-                'avatar' => $checkAvatar['path'] ?? '',
+                'avatar' => $checkAvatar['path'] ?? $oldAvatar,
                 'updateAt' => date('Y-m-d H:i:s')
             ];
 
             $res = $this->userModel->update($dataUpdate, ['id' => $_SESSION['user_id']]);
             if ($res) {
+                $_SESSION['email'] = $data['email'];
+                $_SESSION['avatar'] = $checkAvatar['path'] ?? $_SESSION['avatar'];
                 echo json_encode([
                     'status' => 'success',
                     'message' => 'Cập nhật thông tin thành công',
@@ -114,7 +123,7 @@ class Profile extends Controller
         }
     }
 
-    private function processAvatar()
+    private function processAvatar(): array
     {
         if (isset($_FILES['avatar'])) {
             // Thư mục lưu trữ ảnh
@@ -176,5 +185,10 @@ class Profile extends Controller
                 'path' => $target_file
             ];
         }
+
+        return [
+            'status' => 'pass',
+            'message' => "Không tìm thấy file"
+        ];
     }
 }

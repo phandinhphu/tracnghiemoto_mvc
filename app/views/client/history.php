@@ -126,7 +126,7 @@
                                             <td style="
                                                         display: flex;
                                                     ">
-                                                <button class="btn btn-primary btn-detail" value="<?= $exam['userId'] ?>" test-date="<?= $exam['testDate'] ?>" >Chi tiết</button>
+                                                <button class="btn btn-primary btn-detail" data-toggle="modal" data-target="#modalDetail" value="<?= $exam['userId'] ?>" test-date="<?= $exam['testDate'] ?>" >Chi tiết</button>
                                                 <button class="btn btn-success btn-export ml-2" test-date="<?= $exam['testDate'] ?>" >Export excel</button>
                                             </td>
                                         </tr>
@@ -215,3 +215,88 @@
     </div>
 </div>
 <?php endif; ?>
+
+<div class="modal fade" tabindex="-1" id="modalDetail" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="font-size: 2.2rem;">Chi tiết</h4>
+            </div>
+            <div class="modal-body" style="
+                    font-size: 1.4rem;
+                    overflow: scroll;
+                    height: 400px;
+                    overflow-x: hidden;
+                ">
+                <div id="list-answer"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-modal-close" type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.btn-export').onclick = (e) => {
+        let testDate = e.target.getAttribute('test-date');
+        window.location.href = '<?= WEB_ROOT . '/lich-su/bai-thi/tai-xuong' ?>' + '?test_date=' + testDate + '&download=true';
+    }
+</script>
+<script>
+    $('.btn-detail').onclick = async (e) => {
+        let userId = e.target.value;
+        let testDate = e.target.getAttribute('test-date');
+
+        let data = new FormData();
+        data.append('userId', userId);
+        data.append('testDate', testDate);
+
+        let res = await fetch('<?= WEB_ROOT . '/lich-su/chi-tiet' ?>', {
+            method: 'POST',
+            body: data
+        });
+
+        let result = await res.json();
+
+        const listAnswerDOM = document.getElementById('list-answer');
+        listAnswerDOM.innerHTML = '';
+        result.forEach((question, index) => {
+            const div = document.createElement('div');
+            div.classList.add('divst-group-item');
+            div.innerHTML = `
+                <div class="panel-heading">Câu hỏi ${index + 1}</div>
+                <div class="panel-body" style="color: ${question.result === 0 ? 'red' : 'green'}">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    ${question.question}
+                </div>
+                <div class="panel-footer">
+                    <div class="radio" style="
+                        display: flex;
+                        flex-direction: column;
+                    ">
+                        <label>
+                            <input class="mr-2" type="radio" value="A" name="group-${question.id}" ${question.answerUser === 'A' ? 'checked' : ''} disabled>
+                            A. ${question.optionA}
+                        </label>
+
+                        <label><input class="mr-2" type="radio" value="B" name="group-${question.id}" ${question.answerUser === 'B' ? 'checked' : ''} disabled>
+                            B. ${question.optionB}
+                        </label>
+
+                        <label><input class="mr-2" type="radio" value="C" name="group-${question.id}" ${question.answerUser === 'C' ? 'checked' : ''} disabled>
+                            C. ${question.optionC}
+                        </label>
+
+                        <label><input class="mr-2" type="radio" value="D" name="group-${question.id}" ${question.answerUser === 'D' ? 'checked' : ''} disabled>
+                            D. ${question.optionD}
+                        </label>
+                    </div>
+                    <div class="panel-footer">Đáp án đúng: ${question.answer}</div>
+                </div>
+            `;
+            listAnswerDOM.appendChild(div);
+        });
+
+        jQuery("#modalDetail").modal();
+    }
+</script>

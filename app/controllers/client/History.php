@@ -82,4 +82,13 @@ class History extends Controller
         $this->data['title'] = 'Lịch sử làm bài thi';
         $this->view('layouts/client_layout', $this->data);
     }
+
+    public function examDetail(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = $_POST;
+            $res = $this->historyModel->getExamDetail($_SESSION['user_id'], $data['testDate']);
+            echo json_encode($res);
+        }
+    }
 }

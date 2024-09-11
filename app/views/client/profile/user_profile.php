@@ -17,13 +17,13 @@
                             <div class="form__group">
                                 <div class="avatar__label">
                                     <img src="<?= $user['avatar'] ?>" alt="<?= $_SESSION['name'] ?>" class="avatar" title="Avatar">
-                                    <input type="file" class="form__input" rules="required" id="avatar" name="avatar">
+                                    <input type="file" class="form__input" id="avatar" name="avatar">
                                 </div>
                                 <span class="form__message"></span>
                             </div>
                             <div class="form__group">
                                 <label for="username" class="form__label">Username</label>
-                                <input type="text" name="username" id="username" class="form__input" value="<?= $_SESSION['name'] ?>" readonly>
+                                <input type="text" name="username" id="username" class="form__input" value="<?= $user['userName'] ?>" readonly>
                             </div>
                             <div class="form__group">
                                 <label for="email" class="form__label">Email</label>

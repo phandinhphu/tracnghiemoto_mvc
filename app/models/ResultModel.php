@@ -36,4 +36,15 @@ class ResultModel extends Model
             'total' => $total
         ];
     }
+
+    public function getExamDetail($userId, $testDate): array|false
+    {
+        $sql = "SELECT userName, phone, email, result.examName, testDate, 
+                timeLimit, timeComplete, soCauHoi, soCauDung, soCauSai, soCauTrong, score, ketQua
+                FROM users, result, exam
+                WHERE users.id = result.userId AND result.examName = exam.examName
+                AND users.id = :userId AND testDate = :testDate";
+
+        return $this->db->getOne($sql, ['userId' => $userId, 'testDate' => $testDate]);
+    }
 }
